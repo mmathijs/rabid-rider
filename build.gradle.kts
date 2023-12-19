@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.0"
-    application
+    `maven-publish`
 }
 
 group = "nl.mmathijs"
@@ -19,6 +19,7 @@ dependencies {
     implementation("com.acmerobotics.roadrunner:core:0.5.6")
 }
 
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -27,6 +28,20 @@ kotlin {
     jvmToolchain(8)
 }
 
-application {
-    mainClass.set("MainKt")
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/gamermathijs/rabid-rider")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
 }
