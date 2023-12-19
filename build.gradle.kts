@@ -2,6 +2,8 @@ plugins {
     kotlin("jvm") version "1.9.0"
 
     `java-library`
+
+    `maven-publish`
 }
 
 group = "nl.mmathijs"
