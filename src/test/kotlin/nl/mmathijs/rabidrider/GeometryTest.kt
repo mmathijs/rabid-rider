@@ -1,6 +1,7 @@
-package nl.mmathijs.roadrunneraddons
+package nl.mmathijs.rabidrider
 
 import com.acmerobotics.roadrunner.geometry.Vector2d
+import nl.mmathijs.rabidrider.geometry.Line2d
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
 import kotlin.math.sqrt
