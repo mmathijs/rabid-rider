@@ -29,6 +29,10 @@ class Line2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d) {
         val r = numerator1 / denominator
         val s = numerator2 / denominator
 
-        return (r in 0.0..1.0 || (includeEnd && r == 0.0 || r == 1.0)) && (s in 0.0..1.0 || (includeEnd && s == 0.0 || s == 1.0))
+        return if (includeEnd) {
+            r in 0.0..1.0 && s in 0.0..1.0
+        } else {
+            r > 0.0 && r < 1.0 && s > 0.0 && s < 1.0
+        }
     }
 }

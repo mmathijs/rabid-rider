@@ -65,6 +65,10 @@ class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d
         return getLines().any { line -> other.getLines().any { line.intersects(it) } }
     }
 
+    fun intersects(line: Line2d): Boolean {
+        return getLines().any { it.intersects(line) }
+    }
+
     fun contains(point: Vector2d): Boolean {
         return point.x in point1.x..point2.x && point.y in point1.y..point2.y
                 || point.x in point2.x..point1.x && point.y in point2.y..point1.y
