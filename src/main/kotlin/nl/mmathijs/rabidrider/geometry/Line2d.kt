@@ -14,9 +14,7 @@ class Line2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d) {
     fun getPoint2() = point2
 
 
-    fun intersects(other: Line2d, includeEnd: Boolean = true): Boolean {
-        return intersection(other, includeEnd) != null
-    }
+    fun intersects(other: Line2d, includeEnd: Boolean = true): Boolean = intersection(other, includeEnd) != null
 
     fun intersection(other: Line2d, includeEnd: Boolean = true): Vector2d? {
         val denominator =

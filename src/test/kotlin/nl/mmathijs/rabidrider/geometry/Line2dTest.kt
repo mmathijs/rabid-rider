@@ -1,7 +1,6 @@
 package nl.mmathijs.rabidrider.geometry
 
 import com.acmerobotics.roadrunner.geometry.Vector2d
-import nl.mmathijs.rabidrider.geometry.Line2d
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
 import kotlin.math.sqrt
@@ -59,5 +58,9 @@ class Line2dTest {
         val line4 = Line2d(Vector2d(0.0, 1.0), Vector2d(1.0, 2.0))
 
         assertNull(line1.intersection(line4))
+
+        val line5 = Line2d(Vector2d(0.0, 0.0), Vector2d(1.0, 1.0))
+
+        assertEquals(Vector2d(0.0, 0.0), line1.intersection(line5))
     }
 }

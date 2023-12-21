@@ -53,44 +53,32 @@ class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d
     fun shrink(amount: Vector2d) = grow(amount.times(-1.0))
     fun shrink(amount: Double) = grow(amount * -1.0)
 
+    @Deprecated("Use lines() instead", ReplaceWith("lines()"))
+    fun getLines() = lines()
 
-    fun getLines() = listOf(
+    fun lines() = listOf(
         Line2d(point1, Vector2d(point2.x, point1.y)),
         Line2d(Vector2d(point2.x, point1.y), point2),
         Line2d(point2, Vector2d(point1.x, point2.y)),
         Line2d(Vector2d(point1.x, point2.y), point1)
     )
 
-    fun intersects(other: Rectangle2d): Boolean {
-        return getLines().any { line -> other.getLines().any { line.intersects(it) } }
-    }
+    fun intersects(other: Rectangle2d): Boolean = lines().any { line -> other.lines().any { line.intersects(it) } }
 
-    fun intersects(line: Line2d): Boolean {
-        return getLines().any { it.intersects(line) }
-    }
+    fun intersects(line: Line2d): Boolean = lines().any { it.intersects(line) }
 
-    fun contains(point: Vector2d): Boolean {
-        return point.x in point1.x..point2.x && point.y in point1.y..point2.y
+    fun contains(point: Vector2d): Boolean =
+        point.x in point1.x..point2.x && point.y in point1.y..point2.y
                 || point.x in point2.x..point1.x && point.y in point2.y..point1.y
-    }
 
-    fun contains(rectangle: Rectangle2d): Boolean {
-        return contains(rectangle.point1) && contains(rectangle.point2)
-    }
+    fun contains(rectangle: Rectangle2d): Boolean = contains(rectangle.point1) && contains(rectangle.point2)
 
-    fun contains(line: Line2d): Boolean {
-        return contains(line.point1) && contains(line.point2)
-    }
+    fun contains(line: Line2d): Boolean = contains(line.point1) && contains(line.point2)
 
-    fun intersections(line: Line2d): List<Vector2d> {
-        // It is possible that a line intersects multiple lines, at the intersection of 2 lines, so we use distinct to remove duplicates
-        return getLines().mapNotNull { it.intersection(line) }.distinct()
-    }
+    fun intersections(line: Line2d): List<Vector2d> = lines().mapNotNull { it.intersection(line) }.distinct()
 
-    fun distanceIntersection(line: Line2d, point: Vector2d? = null): Double {
-        return intersections(line).minOfOrNull {
-            it.distTo(point ?: line.point1)
-        } ?: Double.POSITIVE_INFINITY
-    }
+    fun distanceIntersection(line: Line2d, point: Vector2d? = null): Double = intersections(line).minOfOrNull {
+        it.distTo(point ?: line.point1)
+    } ?: Double.POSITIVE_INFINITY
 }
 
