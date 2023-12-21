@@ -84,7 +84,7 @@ class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d
 
     fun intersections(line: Line2d): List<Vector2d> {
         // It is possible that a line intersects multiple lines, at the intersection of 2 lines, so we use distinct to remove duplicates
-        return getLines().mapNotNull { it.getIntersection(line) }.distinct()
+        return getLines().mapNotNull { it.intersection(line) }.distinct()
     }
 
     fun distanceIntersection(line: Line2d, point: Vector2d? = null): Double {

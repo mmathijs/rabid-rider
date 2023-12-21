@@ -49,15 +49,15 @@ class Line2dTest {
         val line1 = Line2d(Vector2d(0.0, 0.0), Vector2d(1.0, 1.0))
         val line2 = Line2d(Vector2d(0.0, 1.0), Vector2d(1.0, 0.0))
 
-        assertEquals(Vector2d(0.5, 0.5), line1.getIntersection(line2))
+        assertEquals(Vector2d(0.5, 0.5), line1.intersection(line2))
 
         val line3 = Line2d(Vector2d(0.0, 0.0), Vector2d(1.0, 0.0))
 
-        assertEquals(Vector2d(0.0, 0.0), line1.getIntersection(line3))
-        assertNull(line1.getIntersection(line3, false))
+        assertEquals(Vector2d(0.0, 0.0), line1.intersection(line3))
+        assertNull(line1.intersection(line3, false))
 
         val line4 = Line2d(Vector2d(0.0, 1.0), Vector2d(1.0, 2.0))
 
-        assertNull(line1.getIntersection(line4))
+        assertNull(line1.intersection(line4))
     }
 }
