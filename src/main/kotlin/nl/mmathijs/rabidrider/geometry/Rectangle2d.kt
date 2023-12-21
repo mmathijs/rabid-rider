@@ -3,7 +3,7 @@ package nl.mmathijs.rabidrider.geometry
 import com.acmerobotics.roadrunner.geometry.Vector2d
 
 
-class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d) {
+@Suppress("unused","MemberVisibilityCanBePrivate")class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d) {
 
     fun getPoint1() = point1
     fun getPoint2() = point2
@@ -53,8 +53,10 @@ class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d
     fun shrink(amount: Vector2d) = grow(amount.times(-1.0))
     fun shrink(amount: Double) = grow(amount * -1.0)
 
+    @Deprecated("Use lines() instead", ReplaceWith("lines()"))
+    fun getLines() = lines()
 
-    fun getLines() = listOf(
+    fun lines() = listOf(
         Line2d(point1, Vector2d(point2.x, point1.y)),
         Line2d(Vector2d(point2.x, point1.y), point2),
         Line2d(point2, Vector2d(point1.x, point2.y)),
@@ -62,11 +64,11 @@ class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d
     )
 
     fun intersects(other: Rectangle2d): Boolean {
-        return getLines().any { line -> other.getLines().any { line.intersects(it) } }
+        return lines().any { line -> other.lines().any { line.intersects(it) } }
     }
 
     fun intersects(line: Line2d): Boolean {
-        return getLines().any { it.intersects(line) }
+        return lines().any { it.intersects(line) }
     }
 
     fun contains(point: Vector2d): Boolean {
@@ -84,7 +86,7 @@ class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d
 
     fun intersections(line: Line2d): List<Vector2d> {
         // It is possible that a line intersects multiple lines, at the intersection of 2 lines, so we use distinct to remove duplicates
-        return getLines().mapNotNull { it.intersection(line) }.distinct()
+        return lines().mapNotNull { it.intersection(line) }.distinct()
     }
 
     fun distanceIntersection(line: Line2d, point: Vector2d? = null): Double {
