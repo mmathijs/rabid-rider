@@ -37,5 +37,6 @@ jobs:
             token: ${{ secrets.GITHUB_TOKEN }}
             tag: ${{ env.version_name }}
             name: Release ${{ env.version_name }}
+            generateReleaseNotes: true
             draft: true
             prerelease: false
