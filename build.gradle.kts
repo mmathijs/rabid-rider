@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.0"
 
+    jacoco
     `java-library`
 
     `maven-publish`
@@ -31,6 +32,7 @@ java {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 publishing {
@@ -44,3 +46,17 @@ publishing {
 task("printVersionName") {
     println(project.version)
 }
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = false
+        csv.required = true
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.9"
+}
+
