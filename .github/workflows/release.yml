@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -31,12 +31,11 @@ jobs:
       - name: Retrieve Version
         run: |
           echo "version_name=${{steps.android_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
-      - run: echo ${{ env.version_name }}
       - name: Create new release
         uses: ncipollo/release-action@v1
         with:
             token: ${{ secrets.GITHUB_TOKEN }}
             tag: ${{ env.version_name }}
-            release_name: Release ${{ env.version_name }}
+            name: Release ${{ env.version_name }}
             draft: true
             prerelease: false
