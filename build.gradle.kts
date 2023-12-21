@@ -40,3 +40,7 @@ publishing {
         }
     }
 }
+
+task("printVersionName") {
+    println(project.version)
+}
