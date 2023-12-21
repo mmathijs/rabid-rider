@@ -3,7 +3,7 @@ package nl.mmathijs.rabidrider.geometry
 import com.acmerobotics.roadrunner.geometry.Vector2d
 
 
-@Suppress("unused","MemberVisibilityCanBePrivate")class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d) {
+class Rectangle2d(@JvmField val point1: Vector2d, @JvmField val point2: Vector2d) {
 
     fun getPoint1() = point1
     fun getPoint2() = point2
