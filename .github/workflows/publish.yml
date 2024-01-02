@@ -30,7 +30,7 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
 
     steps: 
@@ -67,7 +67,7 @@ jobs:
           if [ -n "${{ github.event.inputs.shortDescription }}" ]; then
             desc="$desc, ${{ github.event.inputs.shortDescription }}"
           fi
-          echo "::set-output name=description::$desc"
+          echo "Description=$desc" >> $GITHUB_OUTPUT
       - name: Create New Release
         id: create_release
         uses: ncipollo/release-action@v1
