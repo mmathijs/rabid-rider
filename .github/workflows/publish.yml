@@ -39,7 +39,7 @@ jobs:
           distribution: 'corretto'
       - name: Edit version
         run: |
-            sed -i "s/version = '.*'/version = '$(echo ${{ github.event.inputs.version }})'/" build.gradle
+            sed -i "s/version = '.*'/version = '$(echo ${{ github.event.inputs.version }})'/" build.gradle.kts
           
       
 
