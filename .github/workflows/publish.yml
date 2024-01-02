@@ -43,19 +43,17 @@ jobs:
       - name: Edit version in build.gradle.kts
         run: |
             sed -i "s/version = ".*"/version = \"${{ github.event.inputs.version }}\"/g" build.gradle.kts
-      - name: Grant all permissions to all files
-        run: |
-            chmod +x
       - name: Commit version change
         run: |
-          git config --global user.email "rabid-rider-bot@users.noreply.github.com" |
-          git config --global user.name "rabid-rider-bot"
+          git config user.email "rabid-rider-bot@users.noreply.github.com" |
+          git config user.name "rabid-rider-bot"
           git commit -am "Bump version to ${{ github.event.inputs.version }}"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+
       - name: Build with Gradle
         run: |
             ./gradlew build
