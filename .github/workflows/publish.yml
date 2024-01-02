@@ -21,6 +21,9 @@ on:
       version:
         type: string
         description: Version
+      shortDescription:
+        type: string
+        description: Short description
 
 jobs:
   build:
@@ -40,8 +43,32 @@ jobs:
       - name: Edit version in build.gradle.kts
         run: |
             sed -i "s/version = ".*"/version = \"${{ github.event.inputs.version }}\"/g" build.gradle.kts
-      - name: Log build.gradle.kts
+      - name: Grant execute permission for gradlew
         run: |
-            cat build.gradle.kts
+            chmod +x gradlew
+      - name: Build with Gradle
+        run: |
+            ./gradlew build
+
+      - name: Create release name
+        id: create_relase_name
+        run: |
+          desc="Release ${{ github.event.inputs.version }}"
+          if [ -n "${{ github.event.inputs.shortDescription }}" ]; then
+            desc="$desc, ${{ github.event.inputs.shortDescription }}"
+          fi
+          echo "::set-output name=description::$desc"
+      - name: Create New Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: ${{ steps.create_relase_name.outputs.description }}
+          draft: false
+          artifacts: 'build/libs/*.jar'
+          generateReleaseNotes: true
+    
       
 
