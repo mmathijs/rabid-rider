@@ -43,13 +43,23 @@ jobs:
       - name: Edit version in build.gradle.kts
         run: |
             sed -i "s/version = ".*"/version = \"${{ github.event.inputs.version }}\"/g" build.gradle.kts
+      - name: Commit version change
+        run: |
+          git config --global user.email "rabid-rider-bot@users.noreply.github.com" |
+          git config --global user.name "rabid-rider-bot"
+          git commit -am "Bump version to ${{ github.event.inputs.version }}"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      
       - name: Grant execute permission for gradlew
         run: |
             chmod +x gradlew
       - name: Build with Gradle
         run: |
             ./gradlew build
-
       - name: Create release name
         id: create_relase_name
         run: |
@@ -65,6 +75,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.inputs.version }}
+          tag: ${{ github.event.inputs.version }}
           release_name: ${{ steps.create_relase_name.outputs.description }}
           draft: false
           artifacts: 'build/libs/*.jar'
