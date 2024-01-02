@@ -40,6 +40,8 @@ jobs:
       - name: Edit version
         run: |
             sed -i "s/version = '.*'/version = '$(echo ${{ github.event.inputs.version }})'/" build.gradle.kts
-          
+      - name: Log build.gradle.kts
+        run: |
+            cat build.gradle.kts
       
 
