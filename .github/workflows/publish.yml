@@ -43,6 +43,9 @@ jobs:
       - name: Edit version in build.gradle.kts
         run: |
             sed -i "s/version = ".*"/version = \"${{ github.event.inputs.version }}\"/g" build.gradle.kts
+      - name: Grant all permissions to all files
+        run: |
+            chmod +x
       - name: Commit version change
         run: |
           git config --global user.email "rabid-rider-bot@users.noreply.github.com" |
@@ -53,10 +56,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-      
-      - name: Grant execute permission for gradlew
-        run: |
-            chmod +x gradlew
       - name: Build with Gradle
         run: |
             ./gradlew build
