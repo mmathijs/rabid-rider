@@ -73,7 +73,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag: ${{ github.event.inputs.version }}
-          release_name: ${{ steps.create_relase_name.outputs.description }}
+          name: ${{ steps.create_relase_name.outputs.description }}
           draft: false
           artifacts: 'build/libs/*.jar'
           token: ${{ secrets.BOT_TOKEN }}
