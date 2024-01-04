@@ -35,7 +35,7 @@ jobs:
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
 
-      - name: Commit and push the badge (if it changed) 
+      - name: Commit and push the badge to badges branch
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
