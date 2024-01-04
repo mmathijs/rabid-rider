@@ -27,8 +27,6 @@ on:
 
 jobs:
   build:
-    env:
-      GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -54,7 +52,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ env.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
       - run: chmod +x gradlew
       - name: Build with Gradle
@@ -78,6 +76,7 @@ jobs:
           release_name: ${{ steps.create_relase_name.outputs.description }}
           draft: false
           artifacts: 'build/libs/*.jar'
+          token: ${{ secrets.BOT_TOKEN }}
           generateReleaseNotes: true
     
       
