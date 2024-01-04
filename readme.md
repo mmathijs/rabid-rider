@@ -22,7 +22,7 @@ Add the dependency:
 ```groovy
 dependencies {
     ...
-    implementation 'com.github.mmathijs:rabid-rider:0.1.1'
+    implementation 'com.github.mmathijs:rabid-rider:0.1.2'
 }
 ```
 
