@@ -45,8 +45,8 @@ jobs:
             sed -i "s/version = ".*"/version = \"${{ github.event.inputs.version }}\"/g" build.gradle.kts
       - name: Commit version change
         run: |
-          git config --local user.name "rabid-rider-bot" |
-          git config --local user.email "155632846+rabid-rider-bot@users.noreply.github.com" |
+          git config user.email "rabid-rider-bot@users.noreply.github.com" |
+          git config user.name "rabid-rider-bot" |
           git commit -am "Bump version to ${{ github.event.inputs.version }}"
       - name: Push changes
         uses: ad-m/github-push-action@master
