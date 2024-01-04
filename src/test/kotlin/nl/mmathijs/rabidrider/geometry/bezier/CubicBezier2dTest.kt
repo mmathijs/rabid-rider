@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d
 import nl.mmathijs.rabidrider.geometry.Line2d
 import nl.mmathijs.rabidrider.geometry.bezier.CubicBezier2d
 import org.junit.jupiter.api.Test
+import kotlin.math.abs
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
@@ -71,5 +72,46 @@ class CubicBezier2dTest {
 
         assertNotNull(bezier.intersect(line2))
         assertNull(bezier.intersect(line2, false))
+    }
+
+    @Test
+    fun testCubicBezier2dIntersect2() {
+        val bezier1 = CubicBezier2d(
+            Vector2d(0.0, 0.0),
+            Vector2d(0.0, 1.0),
+            Vector2d(1.0, 1.0),
+            Vector2d(1.0, 0.0)
+        )
+
+        val bezier2 = CubicBezier2d(
+            Vector2d(0.0, 1.0),
+            Vector2d(0.0, 0.0),
+            Vector2d(1.0, 0.0),
+            Vector2d(1.0, 1.0)
+        )
+
+        assertNotNull(bezier1.intersect(bezier2))
+
+        val bezier3 = CubicBezier2d(
+            Vector2d(0.0, 2.0),
+            Vector2d(0.0, 1.0),
+            Vector2d(1.0, 1.0),
+            Vector2d(1.0, 2.0)
+        )
+
+        assertNull(bezier1.intersect(bezier3))
+        assertNull(bezier1.intersect(bezier3, false))
+    }
+
+    @Test
+    fun lengthTest() {
+        val bezier = CubicBezier2d(
+            Vector2d(0.0, 0.0),
+            Vector2d(0.0, 1.0),
+            Vector2d(1.0, 1.0),
+            Vector2d(1.0, 0.0)
+        )
+
+        assert(abs(bezier.getLength() - 2.0) < 0.1)
     }
 }
