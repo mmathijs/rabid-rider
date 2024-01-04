@@ -27,7 +27,8 @@ on:
 
 jobs:
   build:
-
+    env:
+      GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,6 +36,8 @@ jobs:
 
     steps: 
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
@@ -51,7 +54,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.BOT_TOKEN }}
+          github_token: ${{ env.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
       - run: chmod +x gradlew
       - name: Build with Gradle
