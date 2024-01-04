@@ -61,9 +61,9 @@ jobs:
       - name: Create release name
         id: create_relase_name
         run: |
-          desc="Release ${{ github.event.inputs.version }}"
+          desc="v${{ github.event.inputs.version }}"
           if [ -n "${{ github.event.inputs.shortDescription }}" ]; then
-            desc="$desc, ${{ github.event.inputs.shortDescription }}"
+            desc="$desc: ${{ github.event.inputs.shortDescription }}"
           fi
           echo "Description=$desc" >> $GITHUB_OUTPUT
       - name: Create New Release
