@@ -46,8 +46,8 @@ abstract class BaseBezier2d {
         for (i in 1..segmentCount) {
             val point = getPoint(i / segmentCount.toDouble())
             val line = Line2d(lastPoint, point)
-            val intersection = line.intersection(other, includeEnd)
-            if (intersection != null) {
+            val intersection = line.intersection(other, true)
+            if (intersection != null && (includeEnd || (i != 1 && i != segmentCount))) {
                 return intersection
             }
             lastPoint = point
@@ -71,8 +71,8 @@ abstract class BaseBezier2d {
         for (i in 1..segmentCount) {
             val point = getPoint(i / segmentCount.toDouble())
             val line = Line2d(lastPoint, point)
-            val intersection = other.intersect(line, includeEnd, segmentCount)
-            if (intersection != null) {
+            val intersection = other.intersect(line, true, segmentCount)
+            if (intersection != null && (includeEnd || (i != 1 && i != segmentCount))) {
                 return intersection
             }
             lastPoint = point
