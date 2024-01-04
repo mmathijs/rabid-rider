@@ -3,7 +3,7 @@ package nl.mmathijs.rabidrider.geometry.bezier
 import com.acmerobotics.roadrunner.geometry.Vector2d
 import kotlin.math.pow
 
-class QuadraticBezier(
+class QuadraticBezier2d(
     @JvmField val point1: Vector2d,
     @JvmField val point2: Vector2d,
     @JvmField val point3: Vector2d) : BaseBezier2d() {
