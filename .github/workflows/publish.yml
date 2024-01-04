@@ -44,9 +44,14 @@ jobs:
       - name: Edit version in build.gradle.kts
         run: |
             sed -i "s/version = ".*"/version = \"${{ github.event.inputs.version }}\"/g" build.gradle.kts
-      - name: Commit version change
-        run: |
-          git commit -am "Bump version to ${{ github.event.inputs.version }}"
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          committer_name: GitHub Actions
+          committer_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: "Bump version to ${{ github.event.inputs.version }}"
+          add: 'build.gradle.kts'
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -67,8 +72,6 @@ jobs:
       - name: Create New Release
         id: create_release
         uses: ncipollo/release-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag: ${{ github.event.inputs.version }}
           name: ${{ steps.create_relase_name.outputs.description }}
