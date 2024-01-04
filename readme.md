@@ -2,7 +2,7 @@
 # Rabid Rider
 
 
-[![](https://jitpack.io/v/mmathijs/rabid-rider.svg)](https://jitpack.io/#mmathijs/rabid-rider) [![](https://jitci.com/gh/mmathijs/rabid-rider/svg)](https://jitci.com/gh/mmathijs/rabid-rider) ![GitHub](https://raw.githubusercontent.com/mmathijs/rabid-rider/badges/jacoco.svg)
+[![](https://jitpack.io/v/mmathijs/rabid-rider.svg)](https://jitpack.io/#mmathijs/rabid-rider) [![Java CI with Gradle](https://github.com/mmathijs/rabid-rider/actions/workflows/gradle.yml/badge.svg)](https://github.com/mmathijs/rabid-rider/actions/workflows/gradle.yml) ![GitHub](https://raw.githubusercontent.com/mmathijs/rabid-rider/badges/jacoco.svg)
 
 Rabid Rider is a extension for RoadRunner that adds some extra (ease of use) features.
 
